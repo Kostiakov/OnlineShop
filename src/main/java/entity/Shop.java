@@ -3,14 +3,13 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
 import command.AddCommand;
-import command.Button;
 import command.Command;
 import command.CompoundCommand;
-import command.ShowCommand;
+import command.DeleteCommand;
+import command.ShowAllCommand;
+import command.ShowCartCommand;
+import command.ShowElementCommand;
 import service.ServiceImpl;
 
 public class Shop {
@@ -45,52 +44,19 @@ public class Shop {
 			System.out.println("6 для выхода из программы");
 			int option = scanner.nextInt();
 			if (option == 1) {
-				System.out.println(listNew);
+				new ShowAllCommand().execute();
 			}
 			if (option == 2) {
-				System.out.println("Введите название товара");
-				String productName = scanner.next();
-				List<Products> someProducts = listNew.stream().filter(i -> i.getName().equals(productName))
-						.collect(Collectors.toList());
-				if (someProducts.isEmpty()) {
-					System.out.println("Такого товара нет");
-					continue;
-				}
-				System.out.println(someProducts);
+				new ShowElementCommand().execute();
 			}
 			if (option == 3) {
-				System.out.println("Введите название товара");
-				String productName = scanner.next();
-				List<Products> someProducts = listNew.stream().filter(i -> i.getName().equals(productName))
-						.collect(Collectors.toList());
-				if (someProducts.isEmpty()) {
-					System.out.println("Такого товара нет");
-					continue;
-				}
-				System.out.println("Введите количество");
-				Integer productAmount = scanner.nextInt();
-				Products theProduct = someProducts.get(0);
-				if (theProduct instanceof Food) {
-					Food finalProduct = new Food();
-					finalProduct.setName(productName);
-					finalProduct.setAmount(productAmount);
-					cart.add(finalProduct);
-				}
-				if (theProduct instanceof Nonfood) {
-					Nonfood finalProduct = new Nonfood();
-					finalProduct.setName(productName);
-					finalProduct.setAmount(productAmount);
-					cart.add(finalProduct);
-				}
+				new AddCommand(cart).execute();
 			}
 			if (option == 4) {
-				System.out.println("Введите название товара");
-				String productDelete = scanner.next();
-				Predicate<Products> theProducts = pr -> pr.getName().equals(productDelete);
-				cart.removeIf(theProducts);
+				new DeleteCommand(cart).execute();
 			}
 			if (option == 5) {
-				System.out.println(cart);
+				new ShowCartCommand(cart).execute();
 			}
 			if (option == 6) {
 				break;
