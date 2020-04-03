@@ -6,12 +6,30 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import command.AddCommand;
+import command.Button;
+import command.Command;
+import command.CompoundCommand;
+import command.ShowCommand;
 import service.ServiceImpl;
 
 public class Shop {
 
 	public static void main(String[] args) {
-
+		
+		
+		/*
+		Button button = new Button();
+		new ShowCommand(button).execute();
+		
+		List <Command> list = new ArrayList<>();
+		list.add(new ShowCommand(button));
+		list.add(new AddCommand(button));
+		CompoundCommand compound = new CompoundCommand(list);
+		compound.execute();
+		*/
+		
+		
 		ServiceImpl service = new ServiceImpl();
 
 		List<Products> listNew = service.getProducts();
