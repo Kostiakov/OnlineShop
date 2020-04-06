@@ -2,14 +2,20 @@ package service;
 
 import java.util.List;
 
-import dao.DaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import dao.Dao;
 import entity.Products;
 
-public class ServiceImpl implements Service {
+@Service
+public class ServiceImpl implements ShopService {
+	
+	@Autowired
+	Dao dao;
 
 	@Override
 	public List<Products> getProducts() {
-		DaoImpl dao = new DaoImpl();
 		return dao.getProducts();
 	}
 

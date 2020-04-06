@@ -6,17 +6,19 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import entity.Food;
 import entity.Nonfood;
 import entity.Products;
 
+@Repository
 public class DaoImpl implements Dao {
 
 	@Override
 	public List<Products> getProducts() {
-		List<Products> listNew = new ArrayList<>();;
-		/*List<Products> listNew;
+		//List<Products> listNew = new ArrayList<>();;
+		List<Products> listNew;
 		try (SessionFactory factory = new Configuration().configure("hibernateProducts.cfg.xml")
 				.addAnnotatedClass(Products.class)
 				.addAnnotatedClass(Food.class)
@@ -29,7 +31,9 @@ public class DaoImpl implements Dao {
 			listNew = session.createQuery("from Products").list();
 
 			session.getTransaction().commit();
-		}*/
+		}
+		
+		/*
 		Food food1 = new Food();
 		food1.setName("Apple");
 		food1.setAmount(20);
@@ -54,6 +58,8 @@ public class DaoImpl implements Dao {
 		listNew.add(food2);
 		listNew.add(nonfood1);
 		listNew.add(nonfood2);
+		*/
+		
 		return listNew;
 	}
 
