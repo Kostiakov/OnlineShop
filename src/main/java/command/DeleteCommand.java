@@ -17,7 +17,7 @@ public class DeleteCommand implements Command {
 	@Override
 	public void execute() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("¬ведите название товара");
+		System.out.println("Enter name of the product");
 		String productDelete = scanner.next();
 		Predicate<Products> theProducts = pr -> pr.getName().equals(productDelete);
 		cart.removeIf(theProducts);

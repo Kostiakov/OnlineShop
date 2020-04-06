@@ -18,12 +18,12 @@ public class Shop {
 
 		while (true) {
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("Введите: 1 для вывода всех товаров");
-			System.out.println("2 для вывода информации о конкретном товаре");
-			System.out.println("3 для добавления товара в корзину");
-			System.out.println("4 для удаления товара из корзины");
-			System.out.println("5 для вывода всех товаров в корзине");
-			System.out.println("6 для выхода из программы");
+			System.out.println("Enter: 1 to show all products");
+			System.out.println("2 to show information about specific product");
+			System.out.println("3 to add product to cart");
+			System.out.println("4 to delete product from cart");
+			System.out.println("5 to show all products in cart");
+			System.out.println("6 to exit programm");
 			int option = scanner.nextInt();
 			if(option == 6) {
 				break;

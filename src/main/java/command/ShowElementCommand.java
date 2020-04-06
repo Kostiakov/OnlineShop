@@ -14,12 +14,12 @@ public class ShowElementCommand implements Command {
 		Scanner scanner = new Scanner(System.in);
 		ServiceImpl service = new ServiceImpl();
 		List<Products> listNew = service.getProducts();
-		System.out.println("Введите название товара");
+		System.out.println("Enter name of the product");
 		String productName = scanner.next();
 		List<Products> someProducts = listNew.stream().filter(i -> i.getName().equals(productName))
 				.collect(Collectors.toList());
 		if (someProducts.isEmpty()) {
-			System.out.println("Такого товара нет");
+			System.out.println("This product is not in stock");
 			return;
 		}
 		System.out.println(someProducts);
