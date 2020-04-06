@@ -33,6 +33,10 @@ public class AddCommand implements Command {
 		System.out.println("Введите количество");
 		Integer productAmount = scanner.nextInt();
 		Products theProduct = someProducts.get(0);
+		if(productAmount>theProduct.getAmount()) {
+			System.out.println("Такого количества товара нет");
+			return;
+		}
 		if (theProduct instanceof Food) {
 			Food finalProduct = new Food();
 			finalProduct.setName(productName);
