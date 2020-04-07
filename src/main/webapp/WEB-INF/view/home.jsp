@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 
 <head>
@@ -8,6 +9,11 @@
 	<h2>Online Shop Home Page</h2>
 	<br>
 	<a href="productList">Show all products</a>
+	<br>
+	<form:form action="searchProduct" modelAttribute="productName" method="POST">
+		<form:input path="name" />
+		<input type="submit" value="Search" />
+	</form:form>
 </body>
 
 </html>

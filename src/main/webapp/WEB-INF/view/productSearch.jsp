@@ -12,19 +12,19 @@
 			<th>Price</th>
 			<th>Calories</th>
 			<th>Life Time</th>
-			<c:forEach var="tempProduct" items="${products}">
+			<c:forEach var="foundProduct" items="${foundProducts}">
 				<tr>
-					<td>${tempProduct.id}</td>
-					<td>${tempProduct.name}</td>
-					<td>${tempProduct.amount}</td>
-					<td>${tempProduct.price}</td>
+					<td>${foundProduct.id}</td>
+					<td>${foundProduct.name}</td>
+					<td>${foundProduct.amount}</td>
+					<td>${foundProduct.price}</td>
 					<c:catch var="error1">
-						<td>${tempProduct.calories}</td>
+						<td>${foundProduct.calories}</td>
 					</c:catch>
 					<c:if test="${error1!=null}">
 					</c:if>
 					<c:catch var="error2">
-						<td>${tempProduct.lifeTime}</td>
+						<td>${foundProduct.lifeTime}</td>
 					</c:catch>
 					<c:if test="${error2!=null}">
 					</c:if>
