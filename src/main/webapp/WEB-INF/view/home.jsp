@@ -10,6 +10,8 @@
 	<br>
 	<a href="productList">Show all products</a>
 	<br>
+	<a href="cartList">Show products in cart</a>
+	<br>
 	Find product
 	<br>
 	<form:form action="searchProduct" modelAttribute="productName" method="POST">

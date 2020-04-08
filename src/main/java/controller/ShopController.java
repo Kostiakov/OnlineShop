@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import entity.Food;
 import entity.Products;
@@ -63,6 +65,21 @@ public class ShopController {
 		cart.add(productName);
 		session.setAttribute("cart", cart);
 		return "addedProduct";
+	}
+	
+	@GetMapping("/cartList")
+	public String showProductsInCart(Model model, HttpSession session) {
+		List<Products> cartModel = (List<Products>) session.getAttribute("cart");
+		model.addAttribute("cartProducts", cartModel);
+		return "cartList";
+	}
+	
+	@RequestMapping("/deleteProduct")
+	public String deleteProductFromCart(@RequestParam("productName") String name, Model model, HttpSession session) {
+		List<Products> cart = (List<Products>) session.getAttribute("cart");
+		cart.removeIf(a->a.getName().equals(name));
+		session.setAttribute("cart", cart);
+		return "redirect:/cartList";
 	}
 
 }
