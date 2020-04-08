@@ -7,5 +7,6 @@ import entity.Products;
 public interface Dao {
 	
 	public List<Products> getProducts();
+	public List<Products> getProduct(String name);
 
 }

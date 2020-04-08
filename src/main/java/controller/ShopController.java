@@ -39,7 +39,6 @@ public class ShopController {
 		}
 		List<Products> cartModel = (List<Products>) session.getAttribute("cart");
 		System.out.println(cartModel);
-		model.addAttribute("cartModel", cartModel);
 		model.addAttribute("productName", new Food());
 		model.addAttribute("addedProduct", new Food());
 		return "home";
@@ -54,8 +53,8 @@ public class ShopController {
 	
 	@PostMapping("/searchProduct")
 	public String searchProducts(@ModelAttribute("productName") Food productName, Model model) {
-		List<Products> list = service.getProducts();
-		list = list.stream().filter(a->a.getName().equals(productName.getName())).collect(Collectors.toList());
+		List<Products> list = service.getProduct(productName.getName());
+		//list = list.stream().filter(a->a.getName().equals(productName.getName())).collect(Collectors.toList());
 		model.addAttribute("foundProducts", list);
 		return "productSearch";
 	}

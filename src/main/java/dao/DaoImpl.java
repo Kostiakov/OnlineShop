@@ -1,66 +1,35 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import entity.Food;
-import entity.Nonfood;
 import entity.Products;
 
 @Repository
 public class DaoImpl implements Dao {
 
+	@Autowired
+	private SessionFactory factory;
+	
+	
 	@Override
 	public List<Products> getProducts() {
-		//List<Products> listNew = new ArrayList<>();;
-		List<Products> listNew;
-		try (SessionFactory factory = new Configuration().configure("hibernateProducts.cfg.xml")
-				.addAnnotatedClass(Products.class)
-				.addAnnotatedClass(Food.class)
-				.addAnnotatedClass(Nonfood.class)
-				.buildSessionFactory()) {
-
-			Session session = factory.getCurrentSession();
-			session.beginTransaction();
-
-			listNew = session.createQuery("from Products").list();
-
-			session.getTransaction().commit();
-		}
-		
-		/*
-		Food food1 = new Food();
-		food1.setName("Apple");
-		food1.setAmount(20);
-		food1.setPrice(60);
-		food1.setCalories(50);
-		Food food2 = new Food();
-		food2.setName("Tomato");
-		food2.setAmount(30);
-		food2.setPrice(80);
-		food2.setCalories(20);
-		Nonfood nonfood1 = new Nonfood();
-		nonfood1.setName("Pen");
-		nonfood1.setAmount(100);
-		nonfood1.setPrice(100);
-		nonfood1.setLifeTime(3);
-		Nonfood nonfood2 = new Nonfood();
-		nonfood2.setName("Pencil");
-		nonfood2.setAmount(200);
-		nonfood2.setPrice(50);
-		nonfood2.setLifeTime(10);
-		listNew.add(food1);
-		listNew.add(food2);
-		listNew.add(nonfood1);
-		listNew.add(nonfood2);
-		*/
-		
+		Session session = factory.getCurrentSession();
+		List<Products> listNew = session.createQuery("from Products").list();
 		return listNew;
+	}
+
+	@Override
+	public List<Products> getProduct(String theName) {
+		Session session = factory.getCurrentSession();
+		Query theQuery = session.createQuery("from Products where name=:theName");
+		theQuery.setParameter("theName", theName);
+		List<Products> theProducts = theQuery.getResultList();
+		return theProducts;
 	}
 
 }
