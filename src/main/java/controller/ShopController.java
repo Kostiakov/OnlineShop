@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -62,6 +63,15 @@ public class ShopController {
 	@PostMapping("/addProductToCart")
 	public String addProductToCart(@ModelAttribute("addedProduct") Food productName, Model model, HttpSession session) {
 		List<Products> cart = (List<Products>) session.getAttribute("cart");
+		List<Products> list = service.getProducts();
+		Optional <Products> theProduct = list.stream().filter(a->a.getName().equals(productName.getName())).findAny();
+		if(theProduct.isEmpty()) {
+			return "errorProductName";
+		}
+		Products pr = theProduct.get();
+		if(pr.getAmount()<productName.getAmount()) {
+			return "errorProductAmount";
+		}
 		cart.add(productName);
 		session.setAttribute("cart", cart);
 		return "addedProduct";
