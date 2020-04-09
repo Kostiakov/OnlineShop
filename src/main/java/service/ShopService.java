@@ -9,5 +9,6 @@ public interface ShopService {
 	public List<Products> getProducts();
 	public List<Products> getProduct(String name);
 	public void deleteProduct(int theId);
+	public void addProduct(Products theProduct);
 
 }

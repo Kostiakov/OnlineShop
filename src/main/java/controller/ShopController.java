@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entity.Food;
+import entity.Nonfood;
 import entity.Products;
 import service.ShopService;
 
@@ -95,6 +96,8 @@ public class ShopController {
 	public String changeDB(Model model) {
 		List<Products> list = service.getProducts();
 		model.addAttribute("products", list);
+		model.addAttribute("food", new Food());
+		model.addAttribute("nonfood", new Nonfood());
 		return "changeDB";
 	}
 	
@@ -103,5 +106,18 @@ public class ShopController {
 		service.deleteProduct(theId);
 		return "redirect:/changeDB";
 	}
+	
+	@PostMapping("/addFoodToDB")
+	public String addFoodToDB(@ModelAttribute("food") Food productName) {
+		service.addProduct(productName);
+		return "redirect:/changeDB";
+	}
+	
+	@PostMapping("/addNonfoodToDB")
+	public String addNonfoodToDB(@ModelAttribute("nonfood") Nonfood productName) {
+		service.addProduct(productName);
+		return "redirect:/changeDB";
+	}
+	
 
 }

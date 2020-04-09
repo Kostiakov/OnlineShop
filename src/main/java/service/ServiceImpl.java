@@ -33,4 +33,10 @@ public class ServiceImpl implements ShopService {
 		dao.deleteProduct(theId);
 	}
 
+	@Transactional
+	@Override
+	public void addProduct(Products theProduct) {
+		dao.addProduct(theProduct);
+	}
+
 }

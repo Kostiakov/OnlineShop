@@ -37,6 +37,60 @@
 			</c:forEach>
 		</tr>
 	</table>
+	<br>
+	<form:form action="addFoodToDB" modelAttribute="food" method="POST">
+		<form:hidden path="id" />
+		<br>
+		<table>
+			<tbody>
+				<tr>
+					<td><label>Name:</label></td>
+					<td><form:input path="name" /></td>
+				</tr>
+				<tr>
+					<td><label>Amount:</label></td>
+					<td><form:input path="amount" /></td>
+				</tr>
+				<tr>
+					<td><label>Price:</label></td>
+					<td><form:input path="price" /></td>
+				</tr>
+				<tr>
+					<td><label>Calories:</label></td>
+					<td><form:input path="calories" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<input type="submit" value="Submit" />
+	</form:form>
+	
+	<form:form action="addNonfoodToDB" modelAttribute="nonfood" method="POST">
+		<form:hidden path="id" />
+		<br>
+		<table>
+			<tbody>
+				<tr>
+					<td><label>Name:</label></td>
+					<td><form:input path="name" /></td>
+				</tr>
+				<tr>
+					<td><label>Amount:</label></td>
+					<td><form:input path="amount" /></td>
+				</tr>
+				<tr>
+					<td><label>Price:</label></td>
+					<td><form:input path="price" /></td>
+				</tr>
+				<tr>
+					<td><label>Life Time:</label></td>
+					<td><form:input path="lifeTime" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<input type="submit" value="Submit" />
+	</form:form>
 	<p>
 		<a href="${pageContext.request.contextPath}/">Back to start</a>
 	</p>

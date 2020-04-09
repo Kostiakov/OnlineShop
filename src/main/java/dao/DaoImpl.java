@@ -39,4 +39,10 @@ public class DaoImpl implements Dao {
 		session.delete(theProduct);
 	}
 
+	@Override
+	public void addProduct(Products theProduct) {
+		Session session = factory.getCurrentSession();
+		session.saveOrUpdate(theProduct);
+	}
+
 }
