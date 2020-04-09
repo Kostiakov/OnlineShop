@@ -26,6 +26,8 @@
 		<form:input path="amount" />
 		<input type="submit" value="Add" />
 	</form:form>
+	<br>
+	<a href="changeDB">Add/Delete items in DB[for Admins]</a>
 </body>
 
 </html>

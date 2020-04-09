@@ -8,5 +8,6 @@ public interface Dao {
 	
 	public List<Products> getProducts();
 	public List<Products> getProduct(String name);
+	public void deleteProduct(int theId);
 
 }

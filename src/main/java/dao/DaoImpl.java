@@ -32,4 +32,11 @@ public class DaoImpl implements Dao {
 		return theProducts;
 	}
 
+	@Override
+	public void deleteProduct(int theId) {
+		Session session = factory.getCurrentSession();
+		Products theProduct = session.get(Products.class, theId);
+		session.delete(theProduct);
+	}
+
 }

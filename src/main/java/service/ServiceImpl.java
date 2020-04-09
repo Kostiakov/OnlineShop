@@ -27,4 +27,10 @@ public class ServiceImpl implements ShopService {
 		return dao.getProduct(name);
 	}
 
+	@Transactional
+	@Override
+	public void deleteProduct(int theId) {
+		dao.deleteProduct(theId);
+	}
+
 }

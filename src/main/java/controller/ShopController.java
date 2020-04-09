@@ -90,5 +90,18 @@ public class ShopController {
 		session.setAttribute("cart", cart);
 		return "redirect:/cartList";
 	}
+	
+	@GetMapping("/changeDB")
+	public String changeDB(Model model) {
+		List<Products> list = service.getProducts();
+		model.addAttribute("products", list);
+		return "changeDB";
+	}
+	
+	@RequestMapping("/deleteProductFromDB")
+	public String deleteProductFromDB(@RequestParam("productId") int theId) {
+		service.deleteProduct(theId);
+		return "redirect:/changeDB";
+	}
 
 }
