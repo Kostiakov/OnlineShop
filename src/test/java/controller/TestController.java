@@ -1,5 +1,6 @@
 package controller;
 
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -9,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -72,6 +74,27 @@ public class TestController {
 				.sessionAttr("cart", theProducts))
 		.andExpect(status().isOk())
 		.andExpect(view().name("addedProduct"));
+		System.out.println(theProducts.size());
+		
+		MatcherAssert.assertThat(theProducts, hasSize(2));
+	}
+	
+	@Test
+	public void deleteProduct() throws Exception {
+		
+		List<Products> theProducts = new ArrayList<>();
+		Food food = new Food();
+		food.setName("Apple");
+		food.setAmount(20);
+		theProducts.add(food);
+		String name = "Apple";
+		
+		mockMvc.perform(post("/deleteProduct")
+				.param("productName", name)
+				.sessionAttr("cart", theProducts))
+		.andExpect(status().is3xxRedirection());
+		
+		MatcherAssert.assertThat(theProducts, hasSize(0));
 	}
 
 }
