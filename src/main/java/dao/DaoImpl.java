@@ -26,7 +26,7 @@ public class DaoImpl implements Dao {
 	@Override
 	public List<Products> getProduct(String theName) {
 		Session session = factory.getCurrentSession();
-		Query theQuery = session.createQuery("from Products where name=:theName");
+		Query theQuery = session.createQuery("from Products where name LIKE CONCAT('%',:theName,'%')");
 		theQuery.setParameter("theName", theName);
 		List<Products> theProducts = theQuery.getResultList();
 		return theProducts;
