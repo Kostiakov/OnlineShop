@@ -39,4 +39,10 @@ public class ServiceImpl implements ShopService {
 		dao.addProduct(theProduct);
 	}
 
+	@Transactional
+	@Override
+	public Products getProductForOrder(String name) {
+		return dao.getProductForOrder(name);
+	}
+
 }

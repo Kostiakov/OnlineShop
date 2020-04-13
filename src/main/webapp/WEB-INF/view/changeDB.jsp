@@ -38,6 +38,8 @@
 		</tr>
 	</table>
 	<br>
+	Add Food
+	<br>
 	<form:form action="addFoodToDB" modelAttribute="food" method="POST">
 		<form:hidden path="id" />
 		<br>
@@ -64,7 +66,9 @@
 		<br>
 		<input type="submit" value="Submit" />
 	</form:form>
-	
+	<br>
+	Add Nonfood
+	<br>
 	<form:form action="addNonfoodToDB" modelAttribute="nonfood" method="POST">
 		<form:hidden path="id" />
 		<br>

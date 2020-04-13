@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,6 +44,17 @@ public class DaoImpl implements Dao {
 	public void addProduct(Products theProduct) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(theProduct);
+	}
+
+	@Override
+	public Products getProductForOrder(String theName) {
+		Session session = factory.getCurrentSession();
+		Query theQuery = session.createQuery("from Products where name=:theName");
+		theQuery.setParameter("theName", theName);
+		List<Products> theProducts = theQuery.getResultList();
+		Optional <Products> theProduct = theProducts.stream().findAny();
+		Products pr = theProduct.get();
+		return pr;
 	}
 
 }

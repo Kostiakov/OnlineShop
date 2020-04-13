@@ -10,5 +10,6 @@ public interface Dao {
 	public List<Products> getProduct(String name);
 	public void deleteProduct(int theId);
 	public void addProduct(Products theProduct);
+	public Products getProductForOrder(String name);
 
 }

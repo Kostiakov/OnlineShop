@@ -27,6 +27,10 @@
 		<input type="submit" value="Add" />
 	</form:form>
 	<br>
+	<form:form action="order" method="POST">
+		<input type="submit" value="Make an order" />
+	</form:form>
+	<br>
 	<a href="changeDB">Add/Delete items in DB[for Admins]</a>
 </body>
 

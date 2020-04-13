@@ -119,5 +119,18 @@ public class ShopController {
 		return "redirect:/changeDB";
 	}
 	
+	@PostMapping("/order")
+	public String order(HttpSession session) {
+		List<Products> cart = (List<Products>) session.getAttribute("cart");
+		for(Products tempProduct:cart) {
+			Products theProduct = service.getProductForOrder(tempProduct.getName());
+			int theProductAmount = theProduct.getAmount();
+			theProduct.setAmount(theProductAmount - tempProduct.getAmount());
+			service.addProduct(theProduct);
+		}
+		cart.clear();
+		session.setAttribute("cart", cart);
+		return "redirect:/";
+	}
 
 }
