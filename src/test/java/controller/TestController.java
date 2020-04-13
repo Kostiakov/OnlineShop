@@ -33,20 +33,25 @@ public class TestController {
 	ShopController shopController;
 	
 	private MockMvc mockMvc;
+	private List<Products> theProducts;
 	
 	@Before
 	public void setup() {
+		
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(shopController).build();
+		
+		theProducts = new ArrayList<>();
+		Food food = new Food();
+		food.setName("Apple");
+		food.setAmount(20);
+		theProducts.add(food);
 	}
 	
 	@Test
 	public void showList() throws Exception {
 		
-		List<Products> products = new ArrayList<>();
-		products.add(new Food());
-		
-		Mockito.when(service.getProducts()).thenReturn(products);
+		Mockito.when(service.getProducts()).thenReturn(theProducts);
 		
 		mockMvc.perform(get("/"))
 		.andExpect(status().isOk())
@@ -56,12 +61,6 @@ public class TestController {
 	
 	@Test
 	public void addProduct() throws Exception {
-		
-		List<Products> theProducts = new ArrayList<>();
-		Food food = new Food();
-		food.setName("Apple");
-		food.setAmount(20);
-		theProducts.add(food);
 		
 		Food theFood = new Food();
 		theFood.setName("Apple");
@@ -74,7 +73,6 @@ public class TestController {
 				.sessionAttr("cart", theProducts))
 		.andExpect(status().isOk())
 		.andExpect(view().name("addedProduct"));
-		System.out.println(theProducts.size());
 		
 		MatcherAssert.assertThat(theProducts, hasSize(2));
 	}
@@ -82,11 +80,6 @@ public class TestController {
 	@Test
 	public void deleteProduct() throws Exception {
 		
-		List<Products> theProducts = new ArrayList<>();
-		Food food = new Food();
-		food.setName("Apple");
-		food.setAmount(20);
-		theProducts.add(food);
 		String name = "Apple";
 		
 		mockMvc.perform(post("/deleteProduct")
@@ -95,6 +88,23 @@ public class TestController {
 		.andExpect(status().is3xxRedirection());
 		
 		MatcherAssert.assertThat(theProducts, hasSize(0));
+	}
+	
+	@Test
+	public void order() throws Exception {
+		
+		Food theFood = new Food();
+		theFood.setName("Apple");
+		theFood.setAmount(5);
+		
+		Mockito.when(service.getProductForOrder(theFood.getName())).thenReturn(theFood);
+		
+		mockMvc.perform(post("/order")
+				.sessionAttr("cart", theProducts))
+		.andExpect(status().is3xxRedirection());
+		
+		MatcherAssert.assertThat(theProducts, hasSize(0));
+		
 	}
 
 }
