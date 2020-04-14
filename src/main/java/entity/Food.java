@@ -4,10 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name="food")
 public class Food extends Products {
 	
+	@Getter
+	@Setter
 	@Column(name="calories")
 	private Integer calories;
 	
@@ -15,14 +20,6 @@ public class Food extends Products {
 		
 	}
 
-	public Integer getCalories() {
-		return calories;
-	}
-
-	public void setCalories(Integer calories) {
-		this.calories = calories;
-	}
-	
 	@Override
 	public String toString() {
 		return "\n" + "Food [name=" + getName() + ", amount=" + getAmount() + ", price=" + getPrice() + ", calories=" + getCalories() + "]";
